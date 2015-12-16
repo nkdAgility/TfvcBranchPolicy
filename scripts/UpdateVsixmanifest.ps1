@@ -3,12 +3,7 @@
 param([string]$PublishVersion)
 
 Write-Verbose "PublishVersion: $PublishVersion" -verbose
-Write-Verbose "PublishVersion: $GitVersion_AssemblySemVer" -verbose
 
-if ($PublishVersion -eq "")
-{
-	$PublishVersion = $GitVersion_AssemblySemVer
-}
 	
 # Regular expression pattern to find the version in the build number 
 # and then apply it to the assemblies
