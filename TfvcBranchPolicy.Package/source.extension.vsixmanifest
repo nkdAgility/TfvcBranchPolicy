@@ -4,8 +4,8 @@
     <Identity Id="TfvcBranchPolicy.5CED051A-9DD9-4BE9-BAF6-336A60A1D898" Version="0.0.0.0" Language="en-US" Publisher="nkdAgility Ltd." />
     <DisplayName>Tfvc Branch Policy</DisplayName>
     <Description xml:space="preserve">These are policies specific to for TFS.</Description>
-    <MoreInfo>https://github.com/nkdAgility/TfvcBranchPolicy</MoreInfo>
-    <GettingStartedGuide>https://github.com/nkdAgility/TfvcBranchPolicy</GettingStartedGuide>
+    <MoreInfo>http://nkdagility.com/tools/tfvc-branch-policy/</MoreInfo>
+    <GettingStartedGuide>http://nkdagility.com/tools/tfvc-branch-policy/</GettingStartedGuide>
   </Metadata>
   <Installation AllUsers="true">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0]" />
