@@ -38,7 +38,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TfvcBranchPolicy.Package</RootNamespace>
-    <AssemblyName>TfvcBranchPolicy.Package</AssemblyName>
+    <AssemblyName>TfvcBranchPolicy</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>

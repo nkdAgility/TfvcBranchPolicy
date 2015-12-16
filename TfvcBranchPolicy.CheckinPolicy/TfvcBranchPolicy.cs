@@ -44,13 +44,14 @@ namespace TfvcBranchPolicy.CheckinPolicy
             get
             {
                 return "You need to install the TFVC Branch Policy to continue.\n\n" +
-                       " . \n Download from XXX";
+                       " . \n Download from http://nkdalm.net/TfvcBranchPolicy";
             }
             set
             {
                 base.InstallationInstructions = value;
             }
         }
+       
 
         /// <summary>
         /// Gets the description.
