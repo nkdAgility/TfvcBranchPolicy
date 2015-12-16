@@ -9,9 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfvcBranchPolicy.Common", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{FBC60AE7-8EE1-4AEE-9811-94678B5D8E83}"
 	ProjectSection(SolutionItems) = preProject
-		scripts\GetRealBuildNumber.ps1 = scripts\GetRealBuildNumber.ps1
-		scripts\PreBuildProcess.ps1 = scripts\PreBuildProcess.ps1
-		scripts\UpdateAssemblyInfo.ps1 = scripts\UpdateAssemblyInfo.ps1
 		scripts\UpdateVsixmanifest.ps1 = scripts\UpdateVsixmanifest.ps1
 	EndProjectSection
 EndProject

@@ -1,12 +1,7 @@
 # Enable -Verbose option
 [CmdletBinding()]
 param([string]$PublishVersion)
-if ($PSBoundParameters.ContainsKey('Disable'))
-{
-	Write-Verbose "Script disabled; no actions will be taken on the files."
-}
 
-$VerbosePreference = "Continue"
 Write-Verbose "PublishVersion: $PublishVersion" -verbose
 	
 # Regular expression pattern to find the version in the build number 
@@ -26,14 +21,13 @@ elseif (-not (Test-Path $Env:BUILD_SOURCESDIRECTORY))
 }
 Write-Verbose "BUILD_SOURCESDIRECTORY: $Env:BUILD_SOURCESDIRECTORY"
 
-	
 # Apply the version to the assembly property files
-$files = gci $Env:BUILD_SOURCESDIRECTORY -recurse -include "*.vsixmanifest" | 
+$files = gci $Env:BUILD_SOURCESDIRECTORY -recurse | 
 	?{ $_.PSIsContainer } | 
 	foreach { gci -Path $_.FullName -Recurse -include *.vsixmanifest }
 if($files)
 {
-	Write-Verbose "Will apply $PublishVersion to $($files.count) files."
+	Write-Verbose "Will apply $PublishVersion to $($files.count) files." -verbose
 	
 	foreach ($file in $files) {
 			
@@ -42,13 +36,14 @@ if($files)
 		{
 			$filecontent = Get-Content($file)
 			attrib $file -r
-			$filecontent -replace $VersionRegex, $PublishVersion | Out-File $file
-			Write-Verbose "$file.FullName - version applied"
+			$filecontent -replace $VersionRegex, $PublishVersion | Out-File $file -Encoding utf8
+			Write-Verbose "$file.FullName - version applied" -verbose
 		}
 	}
 }
 else
 {
-	Write-Warning "Found no files."
+	Write-Warning "Found no files." -verbose
 }
+
 
