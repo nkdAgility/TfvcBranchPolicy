@@ -1,0 +1,115 @@
+﻿<Window x:Class="TfvcBranchPolicy.CheckinPolicy.Editor.BranchLockPolicyEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:common="clr-namespace:TfvcBranchPolicy.CheckinPolicy.Common"
+        Title="Edit Branch Policies" MinHeight="300" Height="400" MinWidth="450" Width="600">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <DataTemplate DataType="{x:Type common:LockBranchPolicy}">
+            <GroupBox DockPanel.Dock="Top" Header="Branch Lock requirements" Margin="5">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Content="Require explicit approval to CheckIn?" IsChecked="{Binding IsLocked}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" IsEnabled="{Binding IsLocked}" Margin="5">
+                        <CheckBox Content="Allow bypass?" IsChecked="{Binding IsByPassEnabled}"  />
+                        <StackPanel Visibility="{Binding IsByPassEnabled, Converter={StaticResource BoolToVis}}" >
+                            <DockPanel>
+                                <Label Content="Bypass pattern: " DockPanel.Dock="Left" />
+                                <TextBox Margin="5" Text="{Binding BypassString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </DockPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type common:WorkItemBranchPolicy}">
+            <GroupBox DockPanel.Dock="Top" Header="Work item linking requirements" Margin="5">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Content="Should at least one Work Item be required?" IsChecked="{Binding WorkItemRequired}" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type common:CodeReviewBranchPolicy}">
+            <GroupBox DockPanel.Dock="Top" Header="Code review requirements" Margin="5">
+                <StackPanel>
+                    <StackPanel>
+                        <CheckBox Content="Require a minimum number of reviewers per pull request?" IsChecked="{Binding CodeReviewRequired}" />
+                        <StackPanel Margin="5" IsEnabled="{Binding CodeReviewRequired}">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Minimum number of reviewers" />
+                                <TextBox Text="{Binding MinimumReviewers}" />
+                            </StackPanel>
+                            <CheckBox Content="Allow users to approve their own changes" IsChecked="{Binding CanApproveOwnChanges}" />
+                        </StackPanel>
+                        <StackPanel>
+                            <Label Content="To require specific reviewers for portions of your code base, specify the path and add the reviewers you want to require." />
+                            <DataGrid ItemsSource="{Binding BranchPatternReviews}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="" />
+                                    <DataGridCheckBoxColumn Header="Enabled" />
+                                    <DataGridCheckBoxColumn Header="Required" />
+                                    <DataGridTemplateColumn Header="Path" />
+                                    <DataGridTemplateColumn Header="Reviewers"  />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Content="Add a new path" />                            
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <DockPanel  Grid.Column="0" MinWidth="200">
+            <DockPanel DockPanel.Dock="Bottom">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                    <Button Command="{Binding CreateCommand}" Margin="5">Add</Button>
+                    <Button Command="{Binding ResetCommand}" Margin="5">Reset</Button>
+                </StackPanel>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Bottom">
+                <Label DockPanel.Dock="Top">Branch Patterns:</Label>
+                <ListBox ItemsSource="{Binding BranchPatterns}" SelectedItem="{Binding CurrentBranchPattern}" HorizontalContentAlignment="Stretch" Margin="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <Button DockPanel.Dock="Right" Content="X" Width="25" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"  CommandParameter="{Binding}" />
+                                <TextBlock Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </DockPanel>
+        <GridSplitter ResizeDirection="Auto" VerticalAlignment="Stretch" Width="5" />
+        <DockPanel Grid.Column="1" MinWidth="225" DataContext="{Binding CurrentBranchPattern}">
+            <Label DockPanel.Dock="Top">Branch Policies:</Label>
+            <GroupBox DockPanel.Dock="Top" Header="Branch Pattern Details">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Content="Name: " HorizontalAlignment="Right" />
+                    <TextBox Grid.Column="1"  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="1" Content="Pattern: " HorizontalAlignment="Right" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Pattern, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+            </GroupBox>
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding BranchPolicies}" Margin="5" />
+            </ScrollViewer>            
+        </DockPanel>
+        </Grid>
+</Window>

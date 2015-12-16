@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfvcBranchPolicy.Package", "TfvcBranchPolicy.Package\TfvcBranchPolicy.Package.csproj", "{D5C0C3C0-9787-4188-8956-9814611E710E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfvcBranchPolicy.Common", "TfvcBranchPolicy.Common\TfvcBranchPolicy.Common.csproj", "{B50DA4AC-D3CD-42C5-AEA5-599375DA5955}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{FBC60AE7-8EE1-4AEE-9811-94678B5D8E83}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\GetRealBuildNumber.ps1 = scripts\GetRealBuildNumber.ps1
+		scripts\PreBuildProcess.ps1 = scripts\PreBuildProcess.ps1
+		scripts\UpdateAssemblyInfo.ps1 = scripts\UpdateAssemblyInfo.ps1
+		scripts\UpdateVsixmanifest.ps1 = scripts\UpdateVsixmanifest.ps1
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfvcBranchPolicy.CheckinPolicy", "TfvcBranchPolicy.CheckinPolicy\TfvcBranchPolicy.CheckinPolicy.csproj", "{DE508B8E-5F65-4814-B674-3F13AA5A9E02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfvcBranchPolicy.CheckinPolicy.Tests", "TfvcBranchPolicy.CheckinPolicy.Tests\TfvcBranchPolicy.CheckinPolicy.Tests.csproj", "{49BE6285-BD9E-4571-85A7-21CCF217EA03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5C0C3C0-9787-4188-8956-9814611E710E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5C0C3C0-9787-4188-8956-9814611E710E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5C0C3C0-9787-4188-8956-9814611E710E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5C0C3C0-9787-4188-8956-9814611E710E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B50DA4AC-D3CD-42C5-AEA5-599375DA5955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B50DA4AC-D3CD-42C5-AEA5-599375DA5955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B50DA4AC-D3CD-42C5-AEA5-599375DA5955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B50DA4AC-D3CD-42C5-AEA5-599375DA5955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE508B8E-5F65-4814-B674-3F13AA5A9E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE508B8E-5F65-4814-B674-3F13AA5A9E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE508B8E-5F65-4814-B674-3F13AA5A9E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE508B8E-5F65-4814-B674-3F13AA5A9E02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49BE6285-BD9E-4571-85A7-21CCF217EA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49BE6285-BD9E-4571-85A7-21CCF217EA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49BE6285-BD9E-4571-85A7-21CCF217EA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49BE6285-BD9E-4571-85A7-21CCF217EA03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

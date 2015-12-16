@@ -1,0 +1,2 @@
+[$RootKey$\TeamFoundation\SourceControl\Checkin Policies] 
+"TfvcBranchPolicy"="$PackageFolder$\TfvcBranchPolicy.CheckinPolicy.dll"

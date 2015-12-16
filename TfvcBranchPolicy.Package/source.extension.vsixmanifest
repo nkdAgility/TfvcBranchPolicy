@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="TfvcBranchPolicy.4dc8c36a-9ee0-4656-9fac-4e8f8be915d3" Version="0.0.0.0" Language="en-US" Publisher="nkdAgility Ltd." />
+    <DisplayName>Tfvc BranchPolicy</DisplayName>
+    <Description xml:space="preserve">These are policies specific to for TFS.</Description>
+  </Metadata>
+  <Installation AllUsers="true">
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0]" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="TfvcBranchPolicy.CheckinPolicy" Path="|TfvcBranchPolicy.CheckinPolicy|" AssemblyName="|TfvcBranchPolicy.CheckinPolicy;AssemblyName|" />
+    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="File" Path="TfvcBranchPolicy.pkgdef" />
+  </Assets>
+</PackageManifest>
