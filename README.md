@@ -3,6 +3,7 @@
 The TFVC Branch Policy tool is an atempt to replicate the new funcationality for Git in Visual Studio ALM. This Checkin Policy will allow administrators to enter a regular repression that matches a path, preferrably a branch, in TFVC and applies configured policies to that branch.
 
 Current policies:
+
 1. Check all Checkins for linked work items
 2. Require a Code Review be associated with a Checkin
 3. Check for bypass string in comment if branch is locked
