@@ -13,7 +13,7 @@ Future policies:
 1. Path specific reviewers
 2. Enforce minimum number of reviewrs
 
-
+![Full Information](http://nkdagility.com/tools/tfvc-branch-policy/)
 
 
 
