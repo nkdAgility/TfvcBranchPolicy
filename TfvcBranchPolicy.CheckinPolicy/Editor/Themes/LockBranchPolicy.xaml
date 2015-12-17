@@ -1,0 +1,26 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="clr-namespace:TfvcBranchPolicy.CheckinPolicy.Common">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Generic.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <DataTemplate DataType="{x:Type common:LockBranchPolicy}">
+        <GroupBox DockPanel.Dock="Top" Header="Branch Lock requirements" Margin="5">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox Content="Require explicit approval to CheckIn?" IsChecked="{Binding IsLocked}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" IsEnabled="{Binding IsLocked}" Margin="5">
+                    <CheckBox Content="Allow bypass?" IsChecked="{Binding IsByPassEnabled}"  />
+                    <StackPanel Visibility="{Binding IsByPassEnabled, Converter={StaticResource BoolToVis}}" >
+                        <DockPanel>
+                            <Label Content="Bypass pattern: " DockPanel.Dock="Left" />
+                            <TextBox Margin="5" Text="{Binding BypassString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DockPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+    </DataTemplate>
+</ResourceDictionary>

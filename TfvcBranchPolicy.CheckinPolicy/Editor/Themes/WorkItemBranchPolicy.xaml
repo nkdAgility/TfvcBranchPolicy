@@ -1,0 +1,17 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="clr-namespace:TfvcBranchPolicy.CheckinPolicy.Common">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/TfvcBranchPolicy.CheckinPolicy;component/Editor/Themes/Generic.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <DataTemplate DataType="{x:Type common:WorkItemBranchPolicy}">
+        <GroupBox DockPanel.Dock="Top" Header="Work item linking requirements" Margin="5">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox Content="Should at least one Work Item be required?" IsChecked="{Binding WorkItemRequired}" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+    </DataTemplate>
+</ResourceDictionary>
