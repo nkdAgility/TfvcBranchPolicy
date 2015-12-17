@@ -15,6 +15,7 @@ using TfvcBranchPolicy.Common;
 using System.Runtime.Serialization;
 using TfvcBranchPolicy.CheckinPolicy.Editor;
 using System.Runtime.Serialization.Formatters.Binary;
+using Microsoft.ApplicationInsights.DataContracts;
 
 namespace TfvcBranchPolicy.CheckinPolicy
 {
@@ -99,7 +100,10 @@ namespace TfvcBranchPolicy.CheckinPolicy
 
         public override bool Edit(IPolicyEditArgs policyEditArgs)
         {
-            TellMe.Instance.TrackEvent("BranchPolicyEdit");
+            PageViewTelemetry pvt = new PageViewTelemetry("BranchPolicyEdit");
+            Stopwatch pvtrak = new Stopwatch();
+            pvtrak.Start();
+            bool result = false;
             try
             {
                 // no policy settings to save
@@ -112,15 +116,17 @@ namespace TfvcBranchPolicy.CheckinPolicy
                 wpfwindow.ShowDialog();
                 branchPatterns = wpfwindow.ViewModel.GetBranchPatterns().ToList();
                 TellMe.Instance.TrackMetric("BranchPolicyCount", branchPatterns.Count);
-                return true;
+                result= true;
             }
             catch (Exception ex)
             {
                 TellMe.Instance.TrackException(ex);
                 MessageBox.Show(string.Format("There was an error loading the Edit Vew for BranchPatternPolicy:/n/n {0}", ex.Message));
-                return false;
+                result= false;
             }
-
+            pvt.Duration = pvtrak.Elapsed;
+            TellMe.Instance.TrackPageView(pvt);
+            return result;
         }
 
         /// <summary>
