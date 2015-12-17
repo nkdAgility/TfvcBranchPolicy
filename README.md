@@ -13,8 +13,7 @@ Future policies:
 1. Path specific reviewers
 2. Enforce minimum number of reviewrs
 
-![Full Information](http://nkdagility.com/tools/tfvc-branch-policy/)
-
+Download: https://visualstudiogallery.msdn.microsoft.com/81a74866-b313-4f23-b1be-787a57d6c597
 
 
 
