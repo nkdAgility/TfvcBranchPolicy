@@ -37,14 +37,14 @@
                 <StackPanel>
                     <StackPanel>
                         <CheckBox Content="Require a minimum number of reviewers per pull request?" IsChecked="{Binding CodeReviewRequired}" />
-                        <StackPanel Margin="5" IsEnabled="{Binding CodeReviewRequired}">
+                        <StackPanel Margin="5" IsEnabled="False">
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Minimum number of reviewers" />
-                                <TextBox Text="{Binding MinimumReviewers}" />
+                                <TextBox Text="{Binding MinimumReviewers, FallbackValue=1}" IsEnabled="False" />
                             </StackPanel>
                             <CheckBox Content="Allow users to approve their own changes" IsChecked="{Binding CanApproveOwnChanges}" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel IsEnabled="False">
                             <Label Content="To require specific reviewers for portions of your code base, specify the path and add the reviewers you want to require." />
                             <DataGrid ItemsSource="{Binding BranchPatternReviews}">
                                 <DataGrid.Columns>
@@ -67,15 +67,17 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <DockPanel  Grid.Column="0" MinWidth="200">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <DockPanel  Grid.Column="0" Grid.RowSpan="2" MinWidth="200">
             <DockPanel DockPanel.Dock="Bottom">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                    <Label>Branch Patterns:</Label>
                     <Button Command="{Binding CreateCommand}" Margin="5">Add</Button>
                     <Button Command="{Binding ResetCommand}" Margin="5">Reset</Button>
-                </StackPanel>
-            </DockPanel>
-            <DockPanel DockPanel.Dock="Bottom">
-                <Label DockPanel.Dock="Top">Branch Patterns:</Label>
+                </StackPanel>                
                 <ListBox ItemsSource="{Binding BranchPatterns}" SelectedItem="{Binding CurrentBranchPattern}" HorizontalContentAlignment="Stretch" Margin="5">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -111,5 +113,8 @@
                 <ItemsControl ItemsSource="{Binding BranchPolicies}" Margin="5" />
             </ScrollViewer>            
         </DockPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Button Margin="5" Click="Button_Click">Save &amp; Exit</Button>
+        </StackPanel>
         </Grid>
 </Window>

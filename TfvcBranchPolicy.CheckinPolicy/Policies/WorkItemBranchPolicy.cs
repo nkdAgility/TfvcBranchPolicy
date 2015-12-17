@@ -62,7 +62,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
                 {
                     foundWorkItems = true;
                 }
-                if (!foundWorkItems)  {branchPolicyFailures.Add(new BranchPolicyFailure(String.Format("The policy for {0} failed because there are no Work Items associated. Bypass has not been enabled", branchPattern.Pattern)));}
+                if (!foundWorkItems) { branchPolicyFailures.Add(new BranchPolicyFailure(String.Format("It is required, for Checkins that contain files that match the expression '{0}[{1}]', that you must have an associated work item.", branchPattern.Pattern, branchPattern.Name))); }
             }
             return branchPolicyFailures;
         }

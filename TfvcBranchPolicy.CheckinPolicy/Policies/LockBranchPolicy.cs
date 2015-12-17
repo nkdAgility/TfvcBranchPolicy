@@ -91,8 +91,8 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
                 //do nothing
             }
 
-            if (lockedWithNoBypass) { branchPolicyFailures.Add(new BranchPolicyFailure(String.Format("The policy for '{0}' failed because the branch is locked. Bypass has not been enabled", branchPattern.Pattern))); }
-            if (lockedWithUnmatchedBypass) { branchPolicyFailures.Add(new BranchPolicyFailure(String.Format("The policy for '{0}' failed because the branch is locked. You can bypass with '{1}' in the comment", branchPattern.Pattern, this.BypassString))); }
+            if (lockedWithNoBypass) { branchPolicyFailures.Add(new BranchPolicyFailure(String.Format("There is a lock on the files that you are checking in. One or more of the files in your checkin match '{0}[{1}]' which has been locked by an administrator. An override has not been configured", branchPattern.Pattern, branchPattern.Name))); }
+            if (lockedWithUnmatchedBypass) { branchPolicyFailures.Add(new BranchPolicyFailure(String.Format("There is a lock on the files that you are checking in. One or more of the files in your checkin match '{0}[{1}]' which has been locked by an administrator. You can override by entering '{2}' in the comment.", branchPattern.Pattern, branchPattern.Name, this.BypassString))); }
             return branchPolicyFailures;
         }
 

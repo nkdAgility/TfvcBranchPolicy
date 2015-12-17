@@ -51,7 +51,11 @@ namespace TfvcBranchPolicy.CheckinPolicy
                 base.InstallationInstructions = value;
             }
         }
-       
+
+        public override void DisplayHelp(PolicyFailure failure)
+        {
+            System.Diagnostics.Process.Start("http://nkdagility.com/tools/tfvc-branch-policy/");
+        }
 
         /// <summary>
         /// Gets the description.
@@ -67,7 +71,7 @@ namespace TfvcBranchPolicy.CheckinPolicy
         /// <value>The type.</value>
         public override string Type
         {
-            get { return string.Format("Branch Policys v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3)); }
+            get { return string.Format("Branch Policies v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3)); }
         }
 
         /// <summary>
