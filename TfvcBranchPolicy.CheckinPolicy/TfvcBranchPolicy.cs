@@ -55,7 +55,9 @@ namespace TfvcBranchPolicy.CheckinPolicy
 
         public override void DisplayHelp(PolicyFailure failure)
         {
-            System.Diagnostics.Process.Start("http://nkdagility.com/tools/tfvc-branch-policy/");
+
+
+            System.Diagnostics.Process.Start("https://github.com/nkdAgility/TfvcBranchPolicy/wiki");
         }
 
         /// <summary>

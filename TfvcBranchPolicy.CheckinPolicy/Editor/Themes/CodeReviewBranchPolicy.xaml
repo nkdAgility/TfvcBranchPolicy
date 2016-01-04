@@ -9,15 +9,19 @@
         <GroupBox DockPanel.Dock="Top" Header="Code review requirements" Margin="5">
             <StackPanel>
                 <StackPanel>
-                    <CheckBox Content="Require a minimum number of reviewers per pull request?" IsChecked="{Binding CodeReviewRequired}" />
-                    <StackPanel Margin="5" IsEnabled="False">
+                    <CheckBox Content="Require a Code Review before checkin?" IsChecked="{Binding CodeReviewRequired}" />
+                    <StackPanel Margin="5" IsEnabled="{Binding CodeReviewRequired}">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Minimum number of reviewers" />
-                            <TextBox Text="{Binding MinimumReviewers, FallbackValue=1}" IsEnabled="False" />
+                            <TextBox Text="{Binding MinimumReviewers, FallbackValue=1}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Review by: " />
+                            <ComboBox Text="Team to Review" ItemsSource="{Binding TeamsToChooseFrom}" SelectedItem="{Binding SelectedTeam}" />
                         </StackPanel>
                         <CheckBox Content="Allow users to approve their own changes" IsChecked="{Binding CanApproveOwnChanges}" />
                     </StackPanel>
-                    <StackPanel IsEnabled="False">
+                    <StackPanel IsEnabled="False" Visibility="Collapsed">
                         <Label Content="To require specific reviewers for portions of your code base, specify the path and add the reviewers you want to require." />
                         <DataGrid ItemsSource="{Binding BranchPatternReviews}">
                             <DataGrid.Columns>
