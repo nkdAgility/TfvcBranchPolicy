@@ -4,6 +4,11 @@ param([string]$PublishVersion)
 
 Write-Verbose "PublishVersion: $PublishVersion" -verbose
 
+Write-Verbose "Major: $Env:GITVERSION_Major" -verbose
+Write-Verbose "Minor: $Env:GITVERSION_Minor" -verbose
+Write-Verbose "Patch: $Env:GITVERSION_Patch" -verbose
+Write-Verbose "MajorMinorPatch: $Env:GITVERSION_MajorMinorPatch" -verbose
+Write-Verbose "BuildMetaData: $Env:GITVERSION_BuildMetaData" -verbose
 	
 # Regular expression pattern to find the version in the build number 
 # and then apply it to the assemblies
