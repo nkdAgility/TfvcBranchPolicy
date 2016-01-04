@@ -42,7 +42,7 @@
             </DockPanel>
         </DockPanel>
         <GridSplitter ResizeDirection="Auto" VerticalAlignment="Stretch" Width="5" />
-        <DockPanel x:Name="EditPannel" Grid.Column="1" MinWidth="225" DataContext="{Binding CurrentBranchPattern}">
+        <DockPanel x:Name="EditPannel" Grid.Column="1" MinWidth="225" DataContext="{Binding SelectedBranchPattern}">
             <Label DockPanel.Dock="Top">Branch Policies:</Label>
             <GroupBox DockPanel.Dock="Top" Header="Branch Pattern Details">
                 <Grid>

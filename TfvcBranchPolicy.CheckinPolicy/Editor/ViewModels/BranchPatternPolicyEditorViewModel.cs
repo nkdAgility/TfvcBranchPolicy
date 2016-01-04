@@ -11,22 +11,24 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using TfvcBranchPolicy.CheckinPolicy.Common;
+using TfvcBranchPolicy.CheckinPolicy.Editor.ViewModels;
 
 namespace TfvcBranchPolicy.CheckinPolicy.Editor
 {
     public class BranchPatternPolicyEditorViewModel : ViewModelBase, IBranchPatternPolicyEditorViewModel
     {
-        public IEnumerable<BranchPattern> _incommingBranchPatterns;
-        public BranchPattern _currentBranchPattern;
+        public IBranchPatternsRepository _repo;
+        public BranchPatternViewModel _SelectedBranchPattern;
+        public IPolicyEditArgs _policyEditArgs;
 
-        public ObservableCollection<BranchPattern> BranchPatterns { get; set; }
-        public BranchPattern CurrentBranchPattern
+        public ObservableCollection<BranchPatternViewModel> BranchPatterns { get; set; }
+        public BranchPatternViewModel SelectedBranchPattern
         {
-            get { return _currentBranchPattern; }
+            get { return _SelectedBranchPattern; }
             set
             {
-                _currentBranchPattern = value;
-                RaisePropertyChanged("CurrentBranchPattern");
+                _SelectedBranchPattern = value;
+                RaisePropertyChanged("SelectedBranchPattern");
         }}
 
         public RelayCommand CreateCommand
@@ -41,53 +43,53 @@ namespace TfvcBranchPolicy.CheckinPolicy.Editor
             private set;
         }
 
-        public RelayCommand<BranchPattern> DeleteCommand
+        public RelayCommand<BranchPatternViewModel> DeleteCommand
         {
             get;
             private set;
         }
 
 
-        internal BranchPatternPolicyEditorViewModel(IEnumerable<BranchPattern> collection)
+        internal BranchPatternPolicyEditorViewModel(IPolicyEditArgs policyEditArgs, IBranchPatternsRepository repo)
         {
-            _incommingBranchPatterns = collection;
+            _policyEditArgs = policyEditArgs;
+            _repo = repo;
+            BranchPatterns = new ObservableCollection<BranchPatternViewModel>();
             CreateCommand = new RelayCommand(ExecuteCreateCommand);
             ResetCommand = new RelayCommand(ExecuteResetCommand);
-            DeleteCommand = new RelayCommand<BranchPattern>(ExecuteDeleteCommand);
+            DeleteCommand = new RelayCommand<BranchPatternViewModel>(ExecuteDeleteCommand);
             ExecuteResetCommand();
             
         }
 
         private void ExecuteResetCommand()
         {
-            if (_incommingBranchPatterns == null)
+            BranchPatterns.Clear();
+            foreach (BranchPattern item in _repo.FindAll())
             {
-                BranchPatterns = new ObservableCollection<BranchPattern>();
-                ExecuteCreateCommand();
-            }
-            else
-            {
-                BranchPatterns = new ObservableCollection<BranchPattern>(_incommingBranchPatterns);
+                BranchPatterns.Add(new BranchPatternViewModel( _policyEditArgs, item ));
             }
             RaisePropertyChanged("BranchPolicys");
         }
 
         private void ExecuteCreateCommand()
         {
-            BranchPattern nBP = new BranchPattern("^.*");
-            BranchPatterns.Add(nBP);
-            CurrentBranchPattern = nBP;
+            BranchPattern newBranchPattern = new BranchPattern("^.*");
+
+            newBranchPattern.BranchPolicies.Add(new LockBranchPolicy());
+            newBranchPattern.BranchPolicies.Add(new CodeReviewBranchPolicy());
+            newBranchPattern.BranchPolicies.Add(new WorkItemBranchPolicy());
+
+            BranchPatterns.Add(new BranchPatternViewModel(_policyEditArgs, newBranchPattern));
+
+            SelectedBranchPattern = (from bpvm in BranchPatterns where bpvm.RawBranchPattern == newBranchPattern select bpvm).Single();
         }
 
-        private void ExecuteDeleteCommand(BranchPattern bpToDelete)
+        private void ExecuteDeleteCommand(BranchPatternViewModel bpToDelete)
         {
+            _repo.Remove(bpToDelete.RawBranchPattern);
             BranchPatterns.Remove(bpToDelete);
-            CurrentBranchPattern = null;
-        }
-
-        IEnumerable<BranchPattern> IBranchPatternPolicyEditorViewModel.GetBranchPatterns()
-        {
-            return BranchPatterns.ToList();
+            SelectedBranchPattern = null;
         }
 
     }

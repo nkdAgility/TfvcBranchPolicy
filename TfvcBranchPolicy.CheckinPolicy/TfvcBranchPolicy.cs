@@ -108,15 +108,11 @@ namespace TfvcBranchPolicy.CheckinPolicy
             bool result = false;
             try
             {
-                // no policy settings to save
-                if (branchPatterns == null)
-                {
-                    branchPatterns = new List<BranchPattern>();
-                }
-                var wpfwindow = new BranchLockPolicyEditorWindow(branchPatterns);
+                IBranchPatternsRepository repo = new BranchPatternsRepository(branchPatterns);
+                var wpfwindow = new BranchLockPolicyEditorWindow(policyEditArgs, repo);
                 ElementHost.EnableModelessKeyboardInterop(wpfwindow);
                 wpfwindow.ShowDialog();
-                branchPatterns = wpfwindow.ViewModel.GetBranchPatterns().ToList();
+                branchPatterns = repo.FindAll().ToList();
                 TellMe.Instance.TrackMetric("BranchPolicyCount", branchPatterns.Count);
                 result= true;
             }

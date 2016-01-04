@@ -22,10 +22,10 @@ namespace TfvcBranchPolicy.CheckinPolicy.Editor
     public partial class BranchLockPolicyEditorWindow : Window
     {
         public IBranchPatternPolicyEditorViewModel ViewModel;
-        public BranchLockPolicyEditorWindow(IEnumerable<BranchPattern> collection)
+        public BranchLockPolicyEditorWindow(IPolicyEditArgs policyEditArgs, IBranchPatternsRepository repo)
         {
             InitializeComponent();
-            ViewModel = new BranchPatternPolicyEditorViewModel(collection);
+            ViewModel = new BranchPatternPolicyEditorViewModel( policyEditArgs,repo);
             this.DataContext = ViewModel;
    
         }
