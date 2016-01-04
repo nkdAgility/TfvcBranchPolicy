@@ -20,11 +20,12 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
         [OptionalField(VersionAdded = 3)]
         private int _minimumReviewers;
         [OptionalField(VersionAdded = 3)]
+        private Boolean _canApproveOwnChanges;
+        [OptionalField(VersionAdded = 3)][Obsolete]
+        private ObservableCollection<BranchPatternReview> _branchPatternReviews;
+
         [NonSerialized]
         private ObservableCollection<TeamFoundationTeam> _TeamsToChooseFrom;
-        private Boolean _canApproveOwnChanges;
-        [OptionalField(VersionAdded = 3)]
-        private ObservableCollection<BranchPatternReview> _branchPatternReviews;
 
         public string Name
         {
