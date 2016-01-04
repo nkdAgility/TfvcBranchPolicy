@@ -8,7 +8,7 @@ using System.Text;
 namespace TfvcBranchPolicy.CheckinPolicy.Common
 {
     [Serializable]
-    public class LockBranchPolicy : ObservableBase, IBranchPolicy
+    public class LockBranchPolicy : IBranchPolicy
     {
         [OptionalField(VersionAdded = 2)]
         private Boolean _IsLocked;
@@ -26,7 +26,6 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _BypassString = value;
-                OnPropertyChanged("BypassString");
             }
         }
         public Boolean IsLocked
@@ -38,7 +37,6 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _IsLocked = value;
-                OnPropertyChanged("IsLocked");
             }
         }
 
@@ -51,7 +49,6 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _IsByPassEnabled = value;
-                OnPropertyChanged("IsByPassEnabled");
             }
         }
 

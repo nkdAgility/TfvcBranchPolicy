@@ -13,7 +13,7 @@ using System.Text;
 namespace TfvcBranchPolicy.CheckinPolicy.Common
 {
     [Serializable]
-    public class CodeReviewBranchPolicy : ObservableBase, IBranchPolicy
+    public class CodeReviewBranchPolicy : IBranchPolicy
     {
         [OptionalField(VersionAdded = 2)]
         private Boolean _codeReviewRequired;
@@ -23,9 +23,8 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
         private Boolean _canApproveOwnChanges;
         [OptionalField(VersionAdded = 3)][Obsolete]
         private ObservableCollection<BranchPatternReview> _branchPatternReviews;
-
-        [NonSerialized]
-        private ObservableCollection<TeamFoundationTeam> _TeamsToChooseFrom;
+ [OptionalField(VersionAdded = 4)]
+        private Boolean _canMergeWithoutReview;
 
         public string Name
         {
@@ -44,8 +43,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _codeReviewRequired = value;
-                OnPropertyChanged("CodeReviewRequired");
-            }
+              }
         }
 
         public int MinimumReviewers
@@ -57,7 +55,6 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _minimumReviewers = value;
-                OnPropertyChanged("MinimumReviewers");
             }
         }
 
@@ -70,10 +67,10 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _canApproveOwnChanges = value;
-                OnPropertyChanged("CanApproveOwnChanges");
             }
         }
 
+        [Obsolete]
         public ObservableCollection<BranchPatternReview> BranchPatternReviews
         {
             get
@@ -83,9 +80,17 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _branchPatternReviews = value;
-                OnPropertyChanged("BranchPatternReviews");
             }
 
+        }
+
+        public bool CanMergeWithoutReview
+        {
+            get { return _canMergeWithoutReview; }
+            set
+            {
+                _canMergeWithoutReview = value;
+            }
         }
 
         [NonSerialized]
@@ -121,5 +126,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             return branchPolicyFailures;
         }
 
+
+    
     }
 }
