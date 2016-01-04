@@ -80,6 +80,16 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\BranchPatternsRepository.cs" />
+    <Compile Include="Common\IBranchPatternsRepository.cs" />
+    <Compile Include="Common\IRepository.cs" />
+    <Compile Include="Editor\ViewModels\BranchPatternViewModel.cs" />
+    <Compile Include="Editor\ViewModels\BranchPolicyViewModel.cs" />
+    <Compile Include="Editor\ViewModels\CodeReviewBranchPolicyViewModel.cs" />
+    <Compile Include="Editor\ViewModels\IBranchPatternViewModel.cs" />
+    <Compile Include="Editor\ViewModels\IBranchPolicyViewModel.cs" />
+    <Compile Include="Editor\ViewModels\LockBranchPolicyViewModel.cs" />
+    <Compile Include="Editor\ViewModels\WorkItemBranchPolicyViewModel.cs" />
     <Compile Include="TfvcBranchPolicy.cs" />
     <Compile Include="Common\BranchPatternReviewer.cs" />
     <Compile Include="Common\BranchPatternReview.cs" />

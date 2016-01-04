@@ -1,4 +1,5 @@
-﻿using Microsoft.TeamFoundation.VersionControl.Client;
+﻿using Microsoft.TeamFoundation.Client;
+using Microsoft.TeamFoundation.VersionControl.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,11 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
         private int _minimumReviewers;
         [OptionalField(VersionAdded = 3)]
         private Boolean _canApproveOwnChanges;
-        [OptionalField(VersionAdded = 3)]
+        [OptionalField(VersionAdded = 3)][Obsolete]
         private ObservableCollection<BranchPatternReview> _branchPatternReviews;
+
+        [NonSerialized]
+        private ObservableCollection<TeamFoundationTeam> _TeamsToChooseFrom;
 
         public string Name
         {

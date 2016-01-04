@@ -24,10 +24,11 @@ namespace TfvcBranchPolicy.CheckinPolicy.DemoUI
         private void button1_Click(object sender, EventArgs e)
         {
             List<BranchPattern> branchPatterns = new List<BranchPattern>();
-            var wpfwindow = new BranchLockPolicyEditorWindow(branchPatterns);
+            IBranchPatternsRepository repo = new BranchPatternsRepository(branchPatterns);
+            var wpfwindow = new BranchLockPolicyEditorWindow(null, repo);
             ElementHost.EnableModelessKeyboardInterop(wpfwindow);
             wpfwindow.ShowDialog();
-            branchPatterns = wpfwindow.ViewModel.GetBranchPatterns().ToList();
+            branchPatterns = repo.FindAll().ToList();
             this.Close();
         }
     }

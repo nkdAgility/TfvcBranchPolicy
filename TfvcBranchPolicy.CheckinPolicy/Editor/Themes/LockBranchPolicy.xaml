@@ -1,11 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:common="clr-namespace:TfvcBranchPolicy.CheckinPolicy.Common">
+    xmlns:common="clr-namespace:TfvcBranchPolicy.CheckinPolicy.Common"
+    xmlns:viewmodels="clr-namespace:TfvcBranchPolicy.CheckinPolicy.Editor.ViewModels">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Generic.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    <DataTemplate DataType="{x:Type common:LockBranchPolicy}">
+    <DataTemplate DataType="{x:Type viewmodels:LockBranchPolicyViewModel}">
         <GroupBox DockPanel.Dock="Top" Header="Branch Lock requirements" Margin="5">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
