@@ -69,14 +69,13 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             }
             else if (IsLocked && IsByPassEnabled)
             {
-
                 if ((pendingCheckin.PendingChanges.Comment != null) && (BypassString != null))
                 {
-                    if (!pendingCheckin.PendingChanges.Comment.Contains(BypassString))
+
+                    if (!System.Text.RegularExpressions.Regex.Match(pendingCheckin.PendingChanges.Comment, BypassString).Success)
                     {
                         lockedWithUnmatchedBypass = true;
                     }
-
                 }
                 else
                 {
