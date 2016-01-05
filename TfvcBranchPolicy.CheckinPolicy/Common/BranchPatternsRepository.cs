@@ -12,6 +12,10 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
 
          public BranchPatternsRepository(IEnumerable<BranchPattern> collection)
         {
+            if (collection == null)
+            {
+                collection = new List<BranchPattern>();
+            }
             _collection = collection.ToList();
         }
 
