@@ -4,8 +4,6 @@ param([string]$PublishVersion)
 
 Write-Verbose "PublishVersion: $PublishVersion" -verbose
 
-
-
  if ($Env:GITVERSION_BUILDMETADATA -eq "" -or $Env:GITVERSION_BUILDMETADATA -eq $null)
  {
      $lastdot = $Env:GITVERSION_PRERELEASETAG.LastIndexOf(".")

@@ -14,7 +14,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Editor.ViewModels
 
         public string Name
         {
-            get { throw new NotImplementedException(); }
+            get { return _name; }
         }
 
          public TeamFoundationTeamFakeViewModel(string name)
