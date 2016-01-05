@@ -18,6 +18,11 @@ namespace TfvcBranchPolicy.CheckinPolicy.Editor.ViewModels
             get { return _rawBranchPolicy; }
         }
 
+        internal IPolicyEditArgs RawPolicyEditArg
+        {
+            get { return _rawPolicyEditArgs; }
+        }
+
         public string Name { get { return _rawBranchPolicy.Name; } }
 
         public BranchPolicyViewModel(IPolicyEditArgs _policyEditArgs, IBranchPolicy branchPolicy)

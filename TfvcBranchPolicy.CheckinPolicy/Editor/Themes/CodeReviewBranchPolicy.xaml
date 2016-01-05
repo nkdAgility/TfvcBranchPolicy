@@ -11,17 +11,17 @@
             <StackPanel>
                 <StackPanel>
                     <CheckBox Content="Require a Code Review before checkin?" IsChecked="{Binding CodeReviewRequired}" />
-                    <StackPanel Margin="5" IsEnabled="{Binding CodeReviewRequired}">
+                    <StackPanel Margin="5" IsEnabled="{Binding CodeReviewRequired}" Visibility="Collapsed">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Minimum number of reviewers" />
                             <TextBox Text="{Binding MinimumReviewers, FallbackValue=1}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Review by: " />
-                            <ComboBox Text="Team to Review" ItemsSource="{Binding TeamsToChooseFrom}" SelectedItem="{Binding SelectedTeam}" />
+                            <ComboBox Text="Team to Review" ItemsSource="{Binding TeamsToChooseFrom}" DisplayMemberPath="Name"  SelectedItem="{Binding SelectedTeam}" />
                         </StackPanel>
                         <CheckBox Content="Allow users to approve their own changes" IsChecked="{Binding CanApproveOwnChanges}" />
-                        <CheckBox Content="Allow merge without code review" IsChecked="{Binding CanMerge}" />
+                        <CheckBox Content="Allow merge without code review" IsChecked="{Binding CanMergeWithoutReview}" />
                     </StackPanel>
                     <StackPanel IsEnabled="False" Visibility="Collapsed">
                         <Label Content="To require specific reviewers for portions of your code base, specify the path and add the reviewers you want to require." />

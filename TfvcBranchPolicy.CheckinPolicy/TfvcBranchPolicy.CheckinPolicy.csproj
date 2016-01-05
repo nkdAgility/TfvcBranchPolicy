@@ -88,7 +88,10 @@
     <Compile Include="Editor\ViewModels\CodeReviewBranchPolicyViewModel.cs" />
     <Compile Include="Editor\ViewModels\IBranchPatternViewModel.cs" />
     <Compile Include="Editor\ViewModels\IBranchPolicyViewModel.cs" />
+    <Compile Include="Editor\ViewModels\ITeamFoundationTeamViewModel.cs" />
     <Compile Include="Editor\ViewModels\LockBranchPolicyViewModel.cs" />
+    <Compile Include="Editor\ViewModels\TeamFoundationTeamFakeViewModel.cs" />
+    <Compile Include="Editor\ViewModels\TeamFoundationTeamViewModel.cs" />
     <Compile Include="Editor\ViewModels\WorkItemBranchPolicyViewModel.cs" />
     <Compile Include="TfvcBranchPolicy.cs" />
     <Compile Include="Common\BranchPatternReviewer.cs" />

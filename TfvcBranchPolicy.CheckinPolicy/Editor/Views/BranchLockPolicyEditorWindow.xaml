@@ -28,8 +28,8 @@
                     <Label>Branch Patterns:</Label>
                     <Button Command="{Binding CreateCommand}" Margin="5" Style="{StaticResource Link}">Add</Button>
                     <Button Command="{Binding ResetCommand}" Margin="5" Style="{StaticResource Link}">Reset</Button>
-                </StackPanel>                
-                <ListBox ItemsSource="{Binding BranchPatterns}" SelectedItem="{Binding CurrentBranchPattern}" HorizontalContentAlignment="Stretch" Margin="5">
+                </StackPanel>
+                <ListBox ItemsSource="{Binding BranchPatterns}" SelectedItem="{Binding SelectedBranchPattern}" HorizontalContentAlignment="Stretch" Margin="5">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <DockPanel>
