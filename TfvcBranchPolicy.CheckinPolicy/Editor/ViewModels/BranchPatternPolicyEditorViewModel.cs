@@ -79,8 +79,8 @@ namespace TfvcBranchPolicy.CheckinPolicy.Editor
             newBranchPattern.BranchPolicies.Add(new LockBranchPolicy());
             newBranchPattern.BranchPolicies.Add(new CodeReviewBranchPolicy());
             newBranchPattern.BranchPolicies.Add(new WorkItemBranchPolicy());
-
-            BranchPatterns.Add(new BranchPatternViewModel(_policyEditArgs, newBranchPattern));
+            _repo.Add(newBranchPattern);
+            ExecuteResetCommand();
 
             SelectedBranchPattern = (from bpvm in BranchPatterns where bpvm.RawBranchPattern == newBranchPattern select bpvm).Single();
         }
@@ -88,7 +88,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Editor
         private void ExecuteDeleteCommand(BranchPatternViewModel bpToDelete)
         {
             _repo.Remove(bpToDelete.RawBranchPattern);
-            BranchPatterns.Remove(bpToDelete);
+            ExecuteResetCommand();
             SelectedBranchPattern = null;
         }
 
