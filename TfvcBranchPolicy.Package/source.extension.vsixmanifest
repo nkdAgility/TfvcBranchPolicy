@@ -16,5 +16,6 @@
   <Assets>
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="TfvcBranchPolicy.CheckinPolicy" Path="|TfvcBranchPolicy.CheckinPolicy|" AssemblyName="|TfvcBranchPolicy.CheckinPolicy;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="File" Path="TfvcBranchPolicy.pkgdef" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="TfvcBranchPolicy.Common" Path="|TfvcBranchPolicy.Common|" AssemblyName="|TfvcBranchPolicy.Common;AssemblyName|" />
   </Assets>
 </PackageManifest>
