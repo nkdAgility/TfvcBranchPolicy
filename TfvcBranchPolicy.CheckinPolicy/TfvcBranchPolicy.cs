@@ -44,8 +44,8 @@ namespace TfvcBranchPolicy.CheckinPolicy
         {
             get
             {
-                return "You need to install the TFVC Branch Policy to continue.\n\n" +
-                       " . \n Download from http://nkdalm.net/TfvcBranchPolicy";
+                return "\n\nACTION: You need to install the TFVC Branch Policy to continue. Learn more from http://nkdagility.net/TfsBranchPolicyWiki" +
+                       "\n\n\n Download from http://nkdagility.net/TfsBranchPolicy";
             }
             set
             {
@@ -55,9 +55,7 @@ namespace TfvcBranchPolicy.CheckinPolicy
 
         public override void DisplayHelp(PolicyFailure failure)
         {
-
-
-            System.Diagnostics.Process.Start("https://github.com/nkdAgility/TfvcBranchPolicy/wiki");
+            System.Diagnostics.Process.Start("http://nkdagility.net/TfsBranchPolicyWiki");
         }
 
         /// <summary>
