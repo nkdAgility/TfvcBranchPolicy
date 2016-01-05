@@ -8,11 +8,11 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
 {
     public class BranchPatternsRepository: IBranchPatternsRepository
     {
-        private readonly IEnumerable<BranchPattern> _collection;
+        private readonly List<BranchPattern> _collection;
 
          public BranchPatternsRepository(IEnumerable<BranchPattern> collection)
         {
-            _collection = collection;
+            _collection = collection.ToList();
         }
 
          public IEnumerable<BranchPattern> FindAll()
@@ -27,17 +27,17 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
 
          public void Add(BranchPattern branchPattern)
          {
-             throw new NotImplementedException();
+             _collection.Add(branchPattern);
          }
 
          public void Remove(BranchPattern branchPattern)
          {
-             throw new NotImplementedException();
+             _collection.Remove(branchPattern);
          }
 
          public BranchPattern Get(string id)
          {
-             throw new NotImplementedException();
+             return (from bp in _collection where bp.Name == id select bp).SingleOrDefault();
          }
 
          public void Save(BranchPattern entity)

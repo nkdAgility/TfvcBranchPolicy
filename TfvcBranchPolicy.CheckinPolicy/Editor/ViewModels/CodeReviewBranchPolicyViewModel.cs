@@ -13,7 +13,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Editor.ViewModels
     public class CodeReviewBranchPolicyViewModel : BranchPolicyViewModel
     {
 
-        public IEnumerable<TeamFoundationTeam> TeamsToChooseFrom
+        public IEnumerable<ITeamFoundationTeamViewModel> TeamsToChooseFrom
         {
             get {
                 return PopulateTeams();
@@ -83,12 +83,22 @@ namespace TfvcBranchPolicy.CheckinPolicy.Editor.ViewModels
         
         }
 
-        private IEnumerable<TeamFoundationTeam> PopulateTeams()
+        private IEnumerable<ITeamFoundationTeamViewModel> PopulateTeams()
         {
-           //ICommonStructureService3 css = this.RawPolicyEditArg.TeamProject.TeamProjectCollection.GetService<ICommonStructureService3>();
-            //css.GetProject(this.RawPolicyEditArg.TeamProject.Name)
-            TfsTeamService tfsts = this.RawPolicyEditArg.TeamProject.TeamProjectCollection.GetService<TfsTeamService>();
-            return tfsts.QueryTeams(this.RawPolicyEditArg.TeamProject.Name);
+            if (this.RawPolicyEditArg != null)
+            {
+                TfsTeamService tfsts = this.RawPolicyEditArg.TeamProject.TeamProjectCollection.GetService<TfsTeamService>();
+                IEnumerable<TeamFoundationTeam> teams = tfsts.QueryTeams(this.RawPolicyEditArg.TeamProject.Name);
+                return (from t in teams select new TeamFoundationTeamViewModel(t));
+            }
+            else
+            {
+                List<ITeamFoundationTeamViewModel> fakeTeams = new List<ITeamFoundationTeamViewModel>();
+                fakeTeams.Add(new TeamFoundationTeamFakeViewModel("Team A"));
+                fakeTeams.Add(new TeamFoundationTeamFakeViewModel("Team B"));
+                return fakeTeams;
+            }
+           
         }
 
 
