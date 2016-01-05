@@ -11,7 +11,7 @@
             <StackPanel>
                 <StackPanel>
                     <CheckBox Content="Require a Code Review before checkin?" IsChecked="{Binding CodeReviewRequired}" />
-                    <StackPanel Margin="5" IsEnabled="{Binding CodeReviewRequired}">
+                    <StackPanel Margin="5" IsEnabled="{Binding CodeReviewRequired}" Visibility="Collapsed">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Minimum number of reviewers" />
                             <TextBox Text="{Binding MinimumReviewers, FallbackValue=1}" />
