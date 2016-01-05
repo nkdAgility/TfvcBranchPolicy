@@ -8,7 +8,9 @@ Write-Verbose "PublishVersion: $PublishVersion" -verbose
 
  if ($Env:GITVERSION_BUILDMETADATA -eq "" -or $Env:GITVERSION_BUILDMETADATA -eq $null)
  {
-	 $Env:GITVERSION_BUILDMETADATA = $Env:GITVERSION_NUGETVERSION.substring($Env:GITVERSION_NUGETVERSION.Length-4)
+     $lastdot = $Env:GITVERSION_PRERELEASETAG.LastIndexOf(".")
+	 $Env:GITVERSION_BUILDMETADATA = $Env:GITVERSION_PRERELEASETAG.substring($lastdot)
+	 Write-Verbose "Updating BUILDMETADATA to $Env:GITVERSION_BUILDMETADATA" -verbose
  }
  $PublishVersion = "$Env:GITVERSION_MAJORMINORPATCH.$Env:GITVERSION_BUILDMETADATA"
 	
