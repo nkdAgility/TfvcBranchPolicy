@@ -18,7 +18,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Review by: " />
-                            <ComboBox Text="Team to Review" ItemsSource="{Binding TeamsToChooseFrom}" SelectedItem="{Binding SelectedTeam}" />
+                            <ComboBox Text="Team to Review" ItemsSource="{Binding TeamsToChooseFrom}" DisplayMemberPath="Name"  SelectedItem="{Binding SelectedTeam}" />
                         </StackPanel>
                         <CheckBox Content="Allow users to approve their own changes" IsChecked="{Binding CanApproveOwnChanges}" />
                         <CheckBox Content="Allow merge without code review" IsChecked="{Binding CanMergeWithoutReview}" />
