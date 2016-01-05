@@ -6,11 +6,11 @@ Write-Verbose "PublishVersion: $PublishVersion" -verbose
 
  Get-ChildItem Env:GITVERSION* -Verbose
 
- if ($Env:GITVERSION_BUILDMETADATA -eq "")
+ if ($Env:GITVERSION_BUILDMETADATA -eq "" -or $Env:GITVERSION_BUILDMETADATA -eq $null)
  {
 	 $Env:GITVERSION_BUILDMETADATA = $Env:GITVERSION_NUGETVERSION.substring($Env:GITVERSION_NUGETVERSION.Length-4)
-	 $PublishVersion = "$Env:GITVERSION_MAJORMINORPATCH.$Env:GITVERSION_BUILDMETADATA"
  }
+ $PublishVersion = "$Env:GITVERSION_MAJORMINORPATCH.$Env:GITVERSION_BUILDMETADATA"
 	
 # Regular expression pattern to find the version in the build number 
 # and then apply it to the assemblies
