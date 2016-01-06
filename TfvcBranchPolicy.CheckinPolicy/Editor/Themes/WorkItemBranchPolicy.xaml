@@ -1,11 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:common="clr-namespace:TfvcBranchPolicy.CheckinPolicy.Common">
+    xmlns:common="clr-namespace:TfvcBranchPolicy.CheckinPolicy.Common"
+    xmlns:viewmodels="clr-namespace:TfvcBranchPolicy.CheckinPolicy.Editor.ViewModels">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/TfvcBranchPolicy.CheckinPolicy;component/Editor/Themes/Generic.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    <DataTemplate DataType="{x:Type common:WorkItemBranchPolicy}">
+    <DataTemplate DataType="{x:Type viewmodels:WorkItemBranchPolicyViewModel}">
         <GroupBox DockPanel.Dock="Top" Header="Work item linking requirements" Margin="5">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">

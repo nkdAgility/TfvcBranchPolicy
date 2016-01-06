@@ -9,7 +9,7 @@ using System.Text;
 namespace TfvcBranchPolicy.CheckinPolicy.Common
 {
     [Serializable]
-    public class WorkItemBranchPolicy : ObservableBase, IBranchPolicy
+    public class WorkItemBranchPolicy : IBranchPolicy
     {
         [OptionalField(VersionAdded = 2)]
         private Boolean _workItemRequired;
@@ -34,7 +34,6 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _workItemRequired = value;
-                OnPropertyChanged("WorkItemRequired");
             }
         }
 
@@ -47,7 +46,6 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _selfAssigned = value;
-                OnPropertyChanged("SelfAssigned");
             }
         }
 

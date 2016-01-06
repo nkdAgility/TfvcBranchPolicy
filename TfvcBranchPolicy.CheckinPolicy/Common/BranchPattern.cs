@@ -21,7 +21,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
         [OptionalField(VersionAdded = 2)]
         private string _name;
         [OptionalField(VersionAdded = 2)]
-        public ObservableCollection<IBranchPolicy> _branchPolicies;
+        private ObservableCollection<IBranchPolicy> _branchPolicies;
 
         public string Name
         {
@@ -56,9 +56,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             this.Pattern = pattern;
             this.Name = pattern;
             _branchPolicies = new ObservableCollection<IBranchPolicy>();
-            BranchPolicies.Add(new LockBranchPolicy());
-            BranchPolicies.Add(new CodeReviewBranchPolicy());
-            BranchPolicies.Add(new WorkItemBranchPolicy());
+           
         }
 
         public ObservableCollection<IBranchPolicy> BranchPolicies

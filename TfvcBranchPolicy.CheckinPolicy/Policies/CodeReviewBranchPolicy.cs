@@ -1,4 +1,5 @@
-﻿using Microsoft.TeamFoundation.VersionControl.Client;
+﻿using Microsoft.TeamFoundation.Client;
+using Microsoft.TeamFoundation.VersionControl.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Text;
 namespace TfvcBranchPolicy.CheckinPolicy.Common
 {
     [Serializable]
-    public class CodeReviewBranchPolicy : ObservableBase, IBranchPolicy
+    public class CodeReviewBranchPolicy : IBranchPolicy
     {
         [OptionalField(VersionAdded = 2)]
         private Boolean _codeReviewRequired;
@@ -20,8 +21,10 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
         private int _minimumReviewers;
         [OptionalField(VersionAdded = 3)]
         private Boolean _canApproveOwnChanges;
-        [OptionalField(VersionAdded = 3)]
+        [OptionalField(VersionAdded = 3)][Obsolete]
         private ObservableCollection<BranchPatternReview> _branchPatternReviews;
+ [OptionalField(VersionAdded = 4)]
+        private Boolean _canMergeWithoutReview;
 
         public string Name
         {
@@ -40,8 +43,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _codeReviewRequired = value;
-                OnPropertyChanged("CodeReviewRequired");
-            }
+              }
         }
 
         public int MinimumReviewers
@@ -53,7 +55,6 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _minimumReviewers = value;
-                OnPropertyChanged("MinimumReviewers");
             }
         }
 
@@ -66,10 +67,10 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _canApproveOwnChanges = value;
-                OnPropertyChanged("CanApproveOwnChanges");
             }
         }
 
+        [Obsolete]
         public ObservableCollection<BranchPatternReview> BranchPatternReviews
         {
             get
@@ -79,9 +80,17 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             set
             {
                 _branchPatternReviews = value;
-                OnPropertyChanged("BranchPatternReviews");
             }
 
+        }
+
+        public bool CanMergeWithoutReview
+        {
+            get { return _canMergeWithoutReview; }
+            set
+            {
+                _canMergeWithoutReview = value;
+            }
         }
 
         [NonSerialized]
@@ -117,5 +126,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             return branchPolicyFailures;
         }
 
+
+    
     }
 }

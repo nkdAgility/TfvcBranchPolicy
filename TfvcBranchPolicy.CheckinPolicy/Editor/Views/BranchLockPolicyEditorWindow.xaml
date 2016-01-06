@@ -28,8 +28,8 @@
                     <Label>Branch Patterns:</Label>
                     <Button Command="{Binding CreateCommand}" Margin="5" Style="{StaticResource Link}">Add</Button>
                     <Button Command="{Binding ResetCommand}" Margin="5" Style="{StaticResource Link}">Reset</Button>
-                </StackPanel>                
-                <ListBox ItemsSource="{Binding BranchPatterns}" SelectedItem="{Binding CurrentBranchPattern}" HorizontalContentAlignment="Stretch" Margin="5">
+                </StackPanel>
+                <ListBox ItemsSource="{Binding BranchPatterns}" SelectedItem="{Binding SelectedBranchPattern}" HorizontalContentAlignment="Stretch" Margin="5">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <DockPanel>
@@ -42,7 +42,7 @@
             </DockPanel>
         </DockPanel>
         <GridSplitter ResizeDirection="Auto" VerticalAlignment="Stretch" Width="5" />
-        <DockPanel x:Name="EditPannel" Grid.Column="1" MinWidth="225" DataContext="{Binding CurrentBranchPattern}">
+        <DockPanel x:Name="EditPannel" Grid.Column="1" MinWidth="225" DataContext="{Binding SelectedBranchPattern}">
             <Label DockPanel.Dock="Top">Branch Policies:</Label>
             <GroupBox DockPanel.Dock="Top" Header="Branch Pattern Details">
                 <Grid>

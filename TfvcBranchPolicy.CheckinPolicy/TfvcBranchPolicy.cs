@@ -44,8 +44,8 @@ namespace TfvcBranchPolicy.CheckinPolicy
         {
             get
             {
-                return "You need to install the TFVC Branch Policy to continue.\n\n" +
-                       " . \n Download from http://nkdalm.net/TfvcBranchPolicy";
+                return "\n\nACTION: You need to install the TFVC Branch Policy to continue. Learn more from http://nkdagility.net/TfsBranchPolicyWiki" +
+                       "\n\n\n Download from http://nkdagility.net/TfsBranchPolicy";
             }
             set
             {
@@ -55,7 +55,7 @@ namespace TfvcBranchPolicy.CheckinPolicy
 
         public override void DisplayHelp(PolicyFailure failure)
         {
-            System.Diagnostics.Process.Start("http://nkdagility.com/tools/tfvc-branch-policy/");
+            System.Diagnostics.Process.Start("http://nkdagility.net/TfsBranchPolicyWiki");
         }
 
         /// <summary>
@@ -106,15 +106,11 @@ namespace TfvcBranchPolicy.CheckinPolicy
             bool result = false;
             try
             {
-                // no policy settings to save
-                if (branchPatterns == null)
-                {
-                    branchPatterns = new List<BranchPattern>();
-                }
-                var wpfwindow = new BranchLockPolicyEditorWindow(branchPatterns);
+                IBranchPatternsRepository repo = new BranchPatternsRepository(branchPatterns);
+                var wpfwindow = new BranchLockPolicyEditorWindow(policyEditArgs, repo);
                 ElementHost.EnableModelessKeyboardInterop(wpfwindow);
                 wpfwindow.ShowDialog();
-                branchPatterns = wpfwindow.ViewModel.GetBranchPatterns().ToList();
+                branchPatterns = repo.FindAll().ToList();
                 TellMe.Instance.TrackMetric("BranchPolicyCount", branchPatterns.Count);
                 result= true;
             }
