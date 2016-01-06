@@ -72,7 +72,7 @@ namespace TfvcBranchPolicy.CheckinPolicy
         /// <value>The type.</value>
         public override string Type
         {
-            get { return string.Format("Branch Policies v{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3)); }
+            get { return string.Format("Tfvc Branch Policies"); }
         }
 
         /// <summary>
