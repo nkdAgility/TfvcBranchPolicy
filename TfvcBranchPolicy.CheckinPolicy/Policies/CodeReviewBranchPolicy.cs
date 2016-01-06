@@ -120,8 +120,8 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
                     }
 
                 }
-                if (!foundCodeReviewWorkItem) branchPolicyFailures.Add(new BranchPolicyFailure(string.Format("It is required that for files that match '{0}[{1}]' that you associated at least one Code Review that has been Approved.", branchPattern.Pattern, branchPattern.Name)));
-                if (foundCodeReviewWorkItem && !allCodeReviewsApproved) branchPolicyFailures.Add(new BranchPolicyFailure(string.Format("It is required that for files that match '{0}[{1}]' that you associated at least one Code Review that has been Approved. Not all of the code reviews associated have been reviewed", branchPattern.Pattern, branchPattern.Name)));
+                if (!foundCodeReviewWorkItem) branchPolicyFailures.Add(new BranchPolicyFailure(string.Format("It is required that for files that match {1} [{0}] that you associated at least one Code Review that has been Approved.", branchPattern.Pattern, branchPattern.Name)));
+                if (foundCodeReviewWorkItem && !allCodeReviewsApproved) branchPolicyFailures.Add(new BranchPolicyFailure(string.Format("It is required that for files that match {1} [{0}] that you associated at least one Code Review that has been Approved. Not all of the code reviews associated have been reviewed", branchPattern.Pattern, branchPattern.Name)));
             }
             return branchPolicyFailures;
         }
