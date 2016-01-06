@@ -17,12 +17,18 @@ Write-Verbose "PublishVersion: $PublishVersion" -verbose
 # Regular expression pattern to find the version in the build number 
 # and then apply it to the assemblies
 $VersionRegex = "\d+\.\d+\.\d+\.\d+"
-	
+
+
 # Make sure path to source code directory is available
 if (-not $Env:BUILD_SOURCESDIRECTORY)
 {
+	if ($Env:APPVEYOR_BUILD_FOLDER)
+	{
+	   $Env:BUILD_SOURCESDIRECTORY = $Env:APPVEYOR_BUILD_FOLDER
+	} else {
 	Write-Error ("BUILD_SOURCESDIRECTORY environment variable is missing.")
 	exit 1
+	}
 }
 elseif (-not (Test-Path $Env:BUILD_SOURCESDIRECTORY))
 {
