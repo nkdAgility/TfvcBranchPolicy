@@ -1,30 +1,9 @@
-version: 1.0.{build}
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: $(MajorMinorPatch).$(BuildMetaData)
-  assembly_file_version: $(AssemblySemVer)
-  assembly_informational_version: $(GITVERSION_FullSemVer)
-build:
-  verbosity: minimal
-  project: TfvcBranchPolicy.sln
-artifacts:
-- path: /**\*.vsix/
-  name: TfvcBranchPolicy
-deploy:
-- provider: GitHub
-  tag: TfvcBranchPolicy-v$(SemVer)
-  release: TfvcBranchPolicy-v$(SemVer)
-  auth_token:
-    secure: iGdxM7NvZKv+4crDQDIvsKofljWXfaCgB7Vse43LqZbakhUJckvPIu2SCuvg80Fi
-  artifact: /**\*.vsix/
-  on:
-    branch: master
 install:
   - choco install gitversion.portable -pre -y
+
 before_build:
   - nuget restore
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
-  - ps: ./scripts/UpdateVsixmanifest.ps1 
 
-
+build:
+  project: TfvcBranchPolicy.sln
