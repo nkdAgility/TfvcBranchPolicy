@@ -152,7 +152,7 @@ namespace TfvcBranchPolicy.CheckinPolicy
                     List<BranchPolicyFailure> branchPolicyFailures = new List<BranchPolicyFailure>();
                     foreach (BranchPattern bp in matchingBranchPatterns)
                     {
-                     branchPolicyFailures  = bp.EvaluatePendingCheckin(_pendingCheckin );
+                     branchPolicyFailures.AddRange( bp.EvaluatePendingCheckin(_pendingCheckin ));
                     }
                     policyFailures = (from bpf in branchPolicyFailures select new PolicyFailure(bpf.Message, this)).ToList();
                 }
