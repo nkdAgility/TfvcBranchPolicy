@@ -7,6 +7,7 @@ assembly_info:
   assembly_informational_version: $(GITVERSION_FullSemVer)
 build:
   verbosity: minimal
+  project: TfvcBranchPolicy.sln
 artifacts:
 - path: /**\*.vsix/
   name: TfvcBranchPolicy
@@ -21,12 +22,9 @@ deploy:
     branch: master
 install:
   - choco install gitversion.portable -pre -y
-
 before_build:
   - nuget restore
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
   - ps: ./scripts/UpdateVsixmanifest.ps1 
 
-build:
-  project: TfvcBranchPolicy.sln
 
