@@ -30,7 +30,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
         {
             get
             {
-                return "Code review";
+                return "Code Review";
             }
         }
 
@@ -111,22 +111,43 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
                         foundCodeReviewWorkItem = true;
                         if (wiInfo.WorkItem.State == "Closed" || wiInfo.WorkItem.State == "Resolved")
                         {
-                            if (((string)wiInfo.WorkItem.Fields["Resolution"].Value == "Approved"))
+                            allCodeReviewsApproved = true;
+                            foreach (WorkItemLink item in wiInfo.WorkItem.WorkItemLinks)
                             {
-                                allCodeReviewsApproved = true;
+                                WorkItem child = wiInfo.WorkItem.Type.Store.GetWorkItem(item.TargetId);
+                                if (child.Type.Name == "Code Review Response")
+                                {
+                                    string closedStatus = child.Fields["Closed Status"].Value.ToString();
+                                    if (closedStatus != "Looks Good" && closedStatus != "Removed")
+                                        allCodeReviewsApproved = false;
+                                }
                             }
                         }
 
                     }
 
                 }
-                if (!foundCodeReviewWorkItem) branchPolicyFailures.Add(new BranchPolicyFailure(string.Format("It is demanded that for files that match {1} [{0}] that you associated at least one Code Review that has been Approved.", branchPattern.Pattern, branchPattern.Name)));
-                if (foundCodeReviewWorkItem && !allCodeReviewsApproved) branchPolicyFailures.Add(new BranchPolicyFailure(string.Format("It is demanded that for files that match {1} [{0}] that you associated at least one Code Review that has been Approved. Not all of the code reviews associated have been reviewed", branchPattern.Pattern, branchPattern.Name)));
+
+                if (!allCodeReviewsApproved)
+                {
+                    if (foundCodeReviewWorkItem)
+                    {
+                        branchPolicyFailures.Add(new BranchPolicyFailure(string.Format(
+                            "{0} Check-in policy [{1}] ({2}):\n" +
+                            "All Code Reviews associated with the check-in must be Approved ('Looks Good').",
+                            Name, branchPattern.Name, branchPattern.Pattern)));
+                    }
+                    else
+                    {
+                        branchPolicyFailures.Add(new BranchPolicyFailure(string.Format(
+                            "{0} Check-in policy [{1}] ({2}):\n" +
+                            "Check-in must be associated with at least one Code Review.\n" +
+                            "All Code Reviews associated with the check-in must be Approved ('Looks Good').",
+                            Name, branchPattern.Name, branchPattern.Pattern)));
+                    }
+                }
             }
             return branchPolicyFailures;
         }
-
-
-    
     }
 }
