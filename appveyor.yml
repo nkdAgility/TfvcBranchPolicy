@@ -1,0 +1,10 @@
+install:
+  - choco install gitversion.portable -pre -y
+
+before_build:
+  - nuget restore
+  - ps: gitversion /l console /output buildserver /updateAssemblyInfo
+  - ps: ./scripts/UpdateVsixmanifest.ps1 
+
+build:
+  project: TfvcBranchPolicy.sln
