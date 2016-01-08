@@ -66,7 +66,7 @@ if($files)
 
              $uploadUri = $result | Select -ExpandProperty upload_url
              $uploadUri = $uploadUri -replace '\{\?name\}', "?name=$file"
-             $uploadFile = Join-Path -path $copyRoot -childpath $file
+             $uploadFile = $file
 
              $uploadParams = @{
                Uri = $uploadUri;
