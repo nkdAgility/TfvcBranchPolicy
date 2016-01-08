@@ -55,40 +55,24 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
         public List<BranchPolicyFailure> EvaluatePendingCheckin(BranchPattern branchPattern, Microsoft.TeamFoundation.VersionControl.Client.IPendingCheckin pendingCheckin)
         {
             List<BranchPolicyFailure> branchPolicyFailures = new List<BranchPolicyFailure>();
-            if (branchPolicyFailures == null)
-            {
-                throw new ArgumentNullException("branchPolicyFailures");
-            }
 
-            Boolean lockedWithNoBypass = false;
-            Boolean lockedWithUnmatchedBypass = false;
             // Evaluate LockPolicy
-            if (IsLocked && !IsByPassEnabled)
+            if (IsLocked)
             {
-                lockedWithNoBypass = true;
-            }
-            else if (IsLocked && IsByPassEnabled)
-            {
-                if ((pendingCheckin.PendingChanges.Comment != null) && (BypassString != null))
-                {
+                string byPassState = IsByPassEnabled ?
+                    string.Format("Type '{0}' in the comment field to bypass the lock.", BypassString) :
+                    "An override has not been configured.";
 
-                    if (!System.Text.RegularExpressions.Regex.Match(pendingCheckin.PendingChanges.Comment, BypassString).Success)
-                    {
-                        lockedWithUnmatchedBypass = true;
-                    }
-                }
-                else
+                if (!IsByPassEnabled ||
+                    pendingCheckin.PendingChanges.Comment == null ||
+                    !System.Text.RegularExpressions.Regex.Match(pendingCheckin.PendingChanges.Comment, BypassString).Success)
                 {
-                    lockedWithUnmatchedBypass = true;
+                    branchPolicyFailures.Add(new BranchPolicyFailure(String.Format(
+                        "{0} Check-in policy [{1}] ({2}):\n" +
+                        "There is a lock one or more of the files that you are checking in.\n{3}\n",
+                        Name, branchPattern.Name, branchPattern.Pattern, byPassState)));
                 }
             }
-            else
-            {
-                //do nothing
-            }
-
-            if (lockedWithNoBypass) { branchPolicyFailures.Add(new BranchPolicyFailure(String.Format("There is a lock on the files that you are checking in. One or more of the files in your checkin match {1} [{0}] which has been locked by an administrator. An override has not been configured", branchPattern.Pattern, branchPattern.Name))); }
-            if (lockedWithUnmatchedBypass) { branchPolicyFailures.Add(new BranchPolicyFailure(String.Format("There is a lock on the files that you are checking in. One or more of the files in your checkin match {1} [{0}] which has been locked by an administrator. You can override by entering '{2}' in the comment.", branchPattern.Pattern, branchPattern.Name, this.BypassString))); }
             return branchPolicyFailures;
         }
 

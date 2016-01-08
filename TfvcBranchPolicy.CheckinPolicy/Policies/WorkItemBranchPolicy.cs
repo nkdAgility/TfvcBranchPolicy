@@ -60,7 +60,11 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
                 {
                     foundWorkItems = true;
                 }
-                if (!foundWorkItems) { branchPolicyFailures.Add(new BranchPolicyFailure(String.Format("You must associate a work item. It is required for Checkins that contain files that match the expression {1} [{0}], that you must have an associated work item.", branchPattern.Pattern, branchPattern.Name))); }
+                if (!foundWorkItems) { 
+                    branchPolicyFailures.Add(new BranchPolicyFailure(String.Format(
+                        "{0} Check-in policy [{1}] ({2}):\n" +
+                        "You must associate at least one work item with the check-in.",
+                        Name, branchPattern.Name, branchPattern.Pattern))); }
             }
             return branchPolicyFailures;
         }
