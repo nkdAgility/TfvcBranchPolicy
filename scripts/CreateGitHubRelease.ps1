@@ -65,6 +65,7 @@ if($files)
 		{
 
              $uploadUri = $result | Select -ExpandProperty upload_url
+             Write-Verbose "Upload URI: $uploadUri"  -verbose
              $uploadUri = $uploadUri -replace '\{\?name\}', "?name=$file"
              $uploadFile = $file
 
@@ -80,7 +81,7 @@ if($files)
              }
 
              $uresult = Invoke-RestMethod @uploadParams
-             Write-Information $uresult  -verbose
+             Write-Verbose $uresult  -verbose
 		}
 	}
 }
