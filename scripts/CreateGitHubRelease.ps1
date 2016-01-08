@@ -36,7 +36,7 @@ $releaseData = @{
  }
 
  $releaseParams = @{
-   Uri = "https://api.github.com/repos/nkdAgility/TfvcBranchPolicy/releases";
+   Uri = "https://api.github.com/repos/$Env:BUILD_REPOSITORY_NAME/releases";
    Method = 'POST';
    Headers = @{
      Authorization = 'Basic ' + [Convert]::ToBase64String(
@@ -47,7 +47,8 @@ $releaseData = @{
  }
 
  $result = Invoke-RestMethod @releaseParams 
- Write-Information $result  -verbose
+
+ Write-Verbose $result  -verbose
 
  # Apply the version to the assembly property files
 $files = gci $copyRoot -recurse | 
