@@ -66,7 +66,7 @@ if($files)
 
              $uploadUri = $result | Select -ExpandProperty upload_url
              Write-Verbose "Upload URI: $uploadUri"  -verbose
-             $uploadUri = $uploadUri -replace '\{\?name\}', "?name=$file"
+             $uploadUri = $uploadUri -replace '\{\?name,label\}', "?name=$($file.Name)"
              $uploadFile = $file
 
              $uploadParams = @{
