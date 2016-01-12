@@ -53,7 +53,7 @@ $releaseData = @{
  # Apply the version to the assembly property files
 $files = gci $copyRoot -recurse | 
 	?{ $_.PSIsContainer } | 
-	foreach { gci -Path $_.FullName -Recurse -include $contents }
+	foreach { gci -Path $_.FullName -Recurse -include $contents -unique }
 if($files)
 {
 	Write-Verbose "Will upload $($files.count) files." -verbose
