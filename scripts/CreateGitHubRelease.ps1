@@ -1,20 +1,29 @@
 # Enable -Verbose option
 [CmdletBinding()]
-param([string]$gitHubApiKey, [string]$artifact)
+param(  [string]$gitHubApiKey, 
+        [string]$contents, 
+        [string]$versionNumber, 
+        [string]$commitId,
+        [string]$copyRoot)
 
-# The version number for this release
-$versionNumber = $Env:GITVERSION_SemVer
-# The Commit SHA for corresponding to this release
-$commitId = $Env:GITVERSION_Sha
+
 # The notes to accompany this release, uses the commit message in this case
-$releaseNotes = $Env:APPVEYOR_REPO_COMMIT_MESSAGE
-# The folder artifacts are built to
-$artifactOutputDirectory = $Env:BUILD_SOURCESDIRECTORY
+$releaseNotes = ""
 
 # Set to true to mark this as a draft release (not visible to users)
 $draft = $TRUE
 # Set to true to mark this as a pre-release version
-$preRelease = $TRUE
+$preRelease = $FALSE
+
+Write-Verbose "gitHubApiKey: $gitHubApiKey" -verbose
+Write-Verbose "contents: $contents" -verbose
+Write-Verbose "versionNumber: $versionNumber" -verbose
+Write-Verbose "commitId: $commitId" -verbose
+Write-Verbose "copyRoot: $copyRoot" -verbose
+Write-Verbose "BUILD_REPOSITORY_NAME: $Env:BUILD_REPOSITORY_NAME" -verbose
+Write-Verbose "BUILD_REPOSITORY_URI: $Env:BUILD_REPOSITORY_URI" -verbose
+
+$preRelease = ($Env:PreReleaseTag -ne "")
 
 
 $releaseData = @{
@@ -27,7 +36,7 @@ $releaseData = @{
  }
 
  $releaseParams = @{
-   Uri = "https://api.github.com/repos/nkdAgility/TfvcBranchPolicy/releases";
+   Uri = "https://api.github.com/repos/$Env:BUILD_REPOSITORY_NAME/releases";
    Method = 'POST';
    Headers = @{
      Authorization = 'Basic ' + [Convert]::ToBase64String(
@@ -38,19 +47,49 @@ $releaseData = @{
  }
 
  $result = Invoke-RestMethod @releaseParams 
- $uploadUri = $result | Select -ExpandProperty upload_url
- $uploadUri = $uploadUri -replace '\{\?name\}', "?name=$artifact"
- $uploadFile = Join-Path -path $artifactOutputDirectory -childpath $artifact
 
- $uploadParams = @{
-   Uri = $uploadUri;
-   Method = 'POST';
-   Headers = @{
-     Authorization = 'Basic ' + [Convert]::ToBase64String(
-     [Text.Encoding]::ASCII.GetBytes($gitHubApiKey + ":x-oauth-basic"));
-   }
-   ContentType = 'application/zip';
-   InFile = $uploadFile
- }
+ Write-Verbose $result  -verbose
 
- $result = Invoke-RestMethod @uploadParams
+ # Apply the version to the assembly property files
+$files = gci $copyRoot -recurse | 
+	?{ $_.PSIsContainer } | 
+	foreach { gci -Path $_.FullName -Recurse -include $contents } | Get-Unique
+if($files)
+{
+	Write-Verbose "Will upload $($files.count) files." -verbose
+	
+	foreach ($file in $files) {
+			
+			
+		if(-not $Disable)
+		{
+
+             $uploadUri = $result | Select -ExpandProperty upload_url
+             Write-Verbose "Upload URI: $uploadUri"  -verbose
+             $uploadUri = $uploadUri -replace '\{\?name,label\}', "?name=$($file.Name)"
+             $uploadFile = $file
+
+             $uploadParams = @{
+               Uri = $uploadUri;
+               Method = 'POST';
+               Headers = @{
+                 Authorization = 'Basic ' + [Convert]::ToBase64String(
+                 [Text.Encoding]::ASCII.GetBytes($gitHubApiKey + ":x-oauth-basic"));
+               }
+               ContentType = 'application/zip';
+               InFile = $uploadFile
+             }
+
+             $uresult = Invoke-RestMethod @uploadParams
+             Write-Verbose $uresult  -verbose
+		}
+	}
+}
+else
+{
+	Write-Warning "Found no files." -verbose
+}
+
+
+
+
