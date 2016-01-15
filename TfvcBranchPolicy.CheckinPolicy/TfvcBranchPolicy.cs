@@ -28,6 +28,9 @@ namespace TfvcBranchPolicy.CheckinPolicy
         [OptionalField(VersionAdded = 2)]
         public List<BranchPattern> branchPatterns;
 
+        private const string HelpURL = "http://nkdagility.net/TfsBranchPolicyWiki";
+        private const string DownloadURL = "http://nkdagility.net/TfsBranchPolicy";
+
         /// <summary>
         /// Gets a value indicating whether this check-in policy has an editable configuration
         /// </summary>
@@ -44,8 +47,8 @@ namespace TfvcBranchPolicy.CheckinPolicy
         {
             get
             {
-                return "\n\nACTION: You need to install the TFVC Branch Policy to continue. Learn more from http://nkdagility.net/TfsBranchPolicyWiki" +
-                       "\n\n\n Download from http://nkdagility.net/TfsBranchPolicy";
+                return string.Format("\n\nACTION: You need to install the TFVC Branch Policy to continue. Learn more from {0}\n\n\n" +
+                    "Download from {1}", HelpURL, DownloadURL;
             }
             set
             {
@@ -55,7 +58,7 @@ namespace TfvcBranchPolicy.CheckinPolicy
 
         public override void DisplayHelp(PolicyFailure failure)
         {
-            System.Diagnostics.Process.Start("http://nkdagility.net/TfsBranchPolicyWiki");
+            System.Diagnostics.Process.Start(HelpURL);
         }
 
         /// <summary>
