@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="TfvcBranchPolicy.5CED051A-9DD9-4BE9-BAF6-336A60A1D898" Version="1.4.0.0" Language="en-US" Publisher="nkdAgility Ltd." />
+    <Identity Id="TfvcBranchPolicy.5CED051A-9DD9-4BE9-BAF6-336A60A1D898" Version="0.0.0.0" Language="en-US" Publisher="nkdAgility Ltd." />
     <DisplayName>Tfvc Branch Policy</DisplayName>
-    <Description xml:space="preserve">These are check-in policies specific for tfvc.</Description>
-    <MoreInfo>https://wiki.slb.com/display/petreldev/Tfvc+Checkin+Policies</MoreInfo>
-    <GettingStartedGuide>https://wiki.slb.com/display/petreldev/Tfvc+Checkin+Policies</GettingStartedGuide>
+    <Description xml:space="preserve">These are policies specific to for TFS.</Description>
+    <MoreInfo>https://github.com/nkdAgility/TfvcBranchPolicy/wiki</MoreInfo>
+    <GettingStartedGuide>https://github.com/nkdAgility/TfvcBranchPolicy/wiki</GettingStartedGuide>
   </Metadata>
   <Installation AllUsers="true">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0]" />
