@@ -28,8 +28,8 @@ namespace TfvcBranchPolicy.CheckinPolicy
         [OptionalField(VersionAdded = 2)]
         public List<BranchPattern> branchPatterns;
 
-        private const string HelpURL = "https://wiki.slb.com/display/petreldev/Tfvc+Checkin+Policies";            //"http://nkdagility.net/TfsBranchPolicyWiki";
-        private const string DownloadURL = HelpURL;        //"http://nkdagility.net/TfsBranchPolicy";
+        private const string HelpURL = "http://nkdagility.net/TfsBranchPolicyWiki";
+        private const string DownloadURL = "http://nkdagility.net/TfsBranchPolicy";
 
         /// <summary>
         /// Gets a value indicating whether this check-in policy has an editable configuration
