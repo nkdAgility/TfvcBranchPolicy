@@ -23,7 +23,7 @@ Write-Verbose "copyRoot: $copyRoot" -verbose
 Write-Verbose "BUILD_REPOSITORY_NAME: $Env:BUILD_REPOSITORY_NAME" -verbose
 Write-Verbose "BUILD_REPOSITORY_URI: $Env:BUILD_REPOSITORY_URI" -verbose
 
-$preRelease = ($Env:PreReleaseTag -ne "")
+$preRelease = ($Env:GITVERSION_PRERELEASETAG -ne "")
 
 
 $releaseData = @{
