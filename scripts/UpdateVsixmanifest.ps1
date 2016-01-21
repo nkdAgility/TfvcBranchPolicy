@@ -2,7 +2,11 @@
 [CmdletBinding()]
 param([string]$PublishVersion)
 
+$PublishVersion = $Env:GITVERSION_AssemblySemVer
+
 Write-Verbose "PublishVersion: $PublishVersion" -verbose
+
+
 
 Get-ChildItem Env:GITVERSION* -Verbose
 	
