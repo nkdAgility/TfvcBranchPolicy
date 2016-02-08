@@ -14,58 +14,62 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
             <RowDefinition />
-            <RowDefinition Height="35" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
-        <DockPanel  Grid.Column="0" Grid.RowSpan="2" MinWidth="200">
-            <DockPanel DockPanel.Dock="Bottom">
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                    <Label>Branch Patterns:</Label>
-                    <Button Command="{Binding CreateCommand}" Margin="5" Style="{StaticResource Link}">Add</Button>
-                    <Button Command="{Binding ResetCommand}" Margin="5" Style="{StaticResource Link}">Reset</Button>
-                </StackPanel>
-                <ListBox ItemsSource="{Binding BranchPatterns}" SelectedItem="{Binding SelectedBranchPattern}" HorizontalContentAlignment="Stretch" Margin="5">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <DockPanel>
-                                <Button DockPanel.Dock="Right" Style="{StaticResource Cross}" Content="X" Width="25" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"  CommandParameter="{Binding}" />
-                                <TextBlock Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </DockPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </DockPanel>
-        </DockPanel>
-        <GridSplitter ResizeDirection="Auto" VerticalAlignment="Stretch" Width="5" />
-        <DockPanel x:Name="EditPannel" Grid.Column="1" MinWidth="225" DataContext="{Binding SelectedBranchPattern}">
-            <Label DockPanel.Dock="Top">Branch Policies:</Label>
-            <GroupBox DockPanel.Dock="Top" Header="Branch Pattern Details">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Content="Name: " HorizontalAlignment="Right" />
-                    <TextBox Grid.Column="1"  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Label Grid.Column="0" Grid.Row="1" Content="Pattern: " HorizontalAlignment="Right" />
-                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Pattern, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                </Grid>
-            </GroupBox>
-            <ScrollViewer>
-                <ItemsControl ItemsSource="{Binding BranchPolicies}" Margin="5" />
-            </ScrollViewer>            
-        </DockPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <Button Margin="5" Click="Button_Click">Save &amp; Exit</Button>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Stretch">
+            <Label Content="Branch Patterns:" VerticalAlignment="Center"/>
+            <Button Command="{Binding CreateCommand}" Margin="5" Content="Add pattern"/>
+            <!-- Doesn't seem to do anything...
+            <Button Command="{Binding ResetCommand}" Margin="5" Content="Reset"/>
+            -->
         </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <DockPanel  Grid.Column="0" Grid.RowSpan="2" MinWidth="200">
+                <DockPanel DockPanel.Dock="Bottom">
+                    <ListBox ItemsSource="{Binding BranchPatterns}" SelectedItem="{Binding SelectedBranchPattern}" HorizontalContentAlignment="Stretch" Margin="5">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Button DockPanel.Dock="Right" Style="{StaticResource Cross}" Content="X" Width="25" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"  CommandParameter="{Binding}" />
+                                    <TextBlock Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </DockPanel>
+            <GridSplitter ResizeDirection="Auto" VerticalAlignment="Stretch" Width="5" />
+            <DockPanel x:Name="EditPannel" Grid.Column="1" MinWidth="225" DataContext="{Binding SelectedBranchPattern}">
+                <GroupBox DockPanel.Dock="Top" Header="Details">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Content="Name: " HorizontalAlignment="Right" />
+                        <TextBox Grid.Column="1" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="Name of pattern (informational)" />
+                        <Label Grid.Column="0" Grid.Row="1" Content="Pattern: " HorizontalAlignment="Right" />
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Pattern, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="Regex pattern to match to activate polices"/>
+                    </Grid>
+                </GroupBox>
+                <Viewbox>
+                    <ItemsControl ItemsSource="{Binding BranchPolicies}" Margin="5" />
+                </Viewbox>
+            </DockPanel>
         </Grid>
+        <StackPanel Grid.Row="2" >
+            <Button Margin="5" Click="Button_Click">Close</Button>
+        </StackPanel>
+    </Grid>
 </Window>

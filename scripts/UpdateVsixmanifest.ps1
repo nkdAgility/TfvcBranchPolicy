@@ -2,17 +2,13 @@
 [CmdletBinding()]
 param([string]$PublishVersion)
 
+$PublishVersion = $Env:GITVERSION_AssemblySemVer
+
 Write-Verbose "PublishVersion: $PublishVersion" -verbose
 
- if ($Env:GITVERSION_BUILDMETADATA -eq "" -or $Env:GITVERSION_BUILDMETADATA -eq $null)
- {
-     $lastdot = $Env:GITVERSION_PRERELEASETAG.LastIndexOf(".")
-	 $Env:GITVERSION_BUILDMETADATA = $Env:GITVERSION_PRERELEASETAG.substring($lastdot+1)
-	 Write-Verbose "Updating BUILDMETADATA to $Env:GITVERSION_BUILDMETADATA" -verbose
- }
- $PublishVersion = "$Env:GITVERSION_MAJORMINORPATCH.$Env:GITVERSION_BUILDMETADATA"
 
-  Get-ChildItem Env:GITVERSION* -Verbose
+
+Get-ChildItem Env:GITVERSION* -Verbose
 	
 # Regular expression pattern to find the version in the build number 
 # and then apply it to the assemblies

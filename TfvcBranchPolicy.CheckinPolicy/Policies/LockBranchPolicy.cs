@@ -61,7 +61,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
             {
                 string byPassState = IsByPassEnabled ?
                     string.Format("Type '{0}' in the comment field to bypass the lock.", BypassString) :
-                    "An override has not been configured.";
+                    "A bypass has not been configured.";
 
                 if (!IsByPassEnabled ||
                     pendingCheckin.PendingChanges.Comment == null ||
@@ -69,7 +69,7 @@ namespace TfvcBranchPolicy.CheckinPolicy.Common
                 {
                     branchPolicyFailures.Add(new BranchPolicyFailure(String.Format(
                         "{0} Check-in policy [{1}] ({2}):\n" +
-                        "There is a lock one or more of the files that you are checking in.\n{3}\n",
+                        "There is a lock on one or more of the files in your check-in.\n{3}\n",
                         Name, branchPattern.Name, branchPattern.Pattern, byPassState)));
                 }
             }
