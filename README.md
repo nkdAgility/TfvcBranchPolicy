@@ -7,7 +7,6 @@ Current policies:
 1. Check all Checkins for linked work items
 2. Require a Code Review be associated with a Checkin
 3. Check for bypass string in comment if branch is locked
-4. Somthing else
 
 Future policies:
 
