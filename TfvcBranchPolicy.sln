@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25401.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfvcBranchPolicy.Package", "TfvcBranchPolicy.Package\TfvcBranchPolicy.Package.csproj", "{D5C0C3C0-9787-4188-8956-9814611E710E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfvcBranchPolicy.Common", "TfvcBranchPolicy.Common\TfvcBranchPolicy.Common.csproj", "{B50DA4AC-D3CD-42C5-AEA5-599375DA5955}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{FBC60AE7-8EE1-4AEE-9811-94678B5D8E83}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
 		scripts\CreateGitHubRelease.ps1 = scripts\CreateGitHubRelease.ps1
 		scripts\UpdateVsixmanifest.ps1 = scripts\UpdateVsixmanifest.ps1
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfvcBranchPolicy.Package", "TfvcBranchPolicy.Package\TfvcBranchPolicy.Package.csproj", "{D5C0C3C0-9787-4188-8956-9814611E710E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfvcBranchPolicy.Common", "TfvcBranchPolicy.Common\TfvcBranchPolicy.Common.csproj", "{B50DA4AC-D3CD-42C5-AEA5-599375DA5955}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfvcBranchPolicy.CheckinPolicy", "TfvcBranchPolicy.CheckinPolicy\TfvcBranchPolicy.CheckinPolicy.csproj", "{DE508B8E-5F65-4814-B674-3F13AA5A9E02}"
 EndProject
